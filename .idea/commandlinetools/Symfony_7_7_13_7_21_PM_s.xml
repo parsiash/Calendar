@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<framework xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schemas/frameworkDescriptionVersion1.1.3.xsd" frameworkId="com.symfony" name="Symfony_7/7/13 7:21 PM_s" invoke="&quot;$PhpExecutable$&quot; C:\Users\Mohammad\Documents\WebProject\app\console" alias="s" enabled="true" version="2">
+  <command>
+    <name>help</name>
+    <help><![CDATA[The <info>help</info> command displays help for a given command:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console help list</info><br/> <br/> You can also output the help in other formats by using the <comment>--format</comment> option:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console help --format=xml list</info><br/> <br/> To display the list of available commands, please use the <info>list</info> command.]]></help>
+    <params>command_name[=null]</params>
+  </command>
+  <command>
+    <name>list</name>
+    <help><![CDATA[The <info>list</info> command lists all commands:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console list</info><br/> <br/> You can also display the commands for a specific namespace:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console list test</info><br/> <br/> You can also output the information in other formats by using the <comment>--format</comment> option:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console list --format=xml</info><br/> <br/> It's also possible to get raw list of commands (useful for embedding command runner):<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console list --raw</info>]]></help>
+    <params>namespace[=null]</params>
+  </command>
+  <command>
+    <name>assetic:dump</name>
+    <params>write_to[=null]</params>
+  </command>
+  <command>
+    <name>assets:install</name>
+    <help><![CDATA[The <info>assets:install</info> command installs bundle assets into a given<br/> directory (e.g. the web directory).<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console assets:install web</info><br/> <br/> A "bundles" directory will be created inside the target directory, and the<br/> "Resources/public" directory of each bundle will be copied into it.<br/> <br/> To create a symlink to each bundle instead of copying its assets, use the<br/> <info>--symlink</info> option:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console assets:install web --symlink</info><br/> <br/> To make symlink relative, add the <info>--relative</info> option:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console assets:install web --symlink --relative</info><br/>]]></help>
+    <params>target[=null]</params>
+  </command>
+  <command>
+    <name>cache:clear</name>
+    <help><![CDATA[The <info>cache:clear</info> command clears the application cache for a given environment<br/> and debug mode:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console cache:clear --env=dev</info><br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console cache:clear --env=prod --no-debug</info>]]></help>
+  </command>
+  <command>
+    <name>cache:warmup</name>
+    <help><![CDATA[The <info>cache:warmup</info> command warms up the cache.<br/> <br/> Before running this command, the cache must be empty.<br/> <br/> This command does not generate the classes cache (as when executing this<br/> command, too many classes that should be part of the cache are already loaded<br/> in memory). Use <comment>curl</comment> or any other similar tool to warm up<br/> the classes cache if you want.]]></help>
+  </command>
+  <command>
+    <name>config:dump-reference</name>
+    <help><![CDATA[The <info>config:dump-reference</info> command dumps the default configuration for an extension/bundle.<br/> <br/> The extension alias or bundle name can be used:<br/> <br/> Example:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console config:dump-reference framework</info><br/> <br/> or<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console config:dump-reference FrameworkBundle</info>]]></help>
+    <params>name[=null]</params>
+  </command>
+  <command>
+    <name>container:debug</name>
+    <help><![CDATA[The <info>container:debug</info> command displays all configured <comment>public</comment> services:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console container:debug</info><br/> <br/> To get specific information about a service, specify its name:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console container:debug validator</info><br/> <br/> By default, private services are hidden. You can display all services by<br/> using the --show-private flag:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console container:debug --show-private</info><br/> <br/> Use the --tags option to display tagged <comment>public</comment> services grouped by tag:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console container:debug --tags</info><br/> <br/> Find all services with a specific tag by specifying the tag name with the --tag option:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console container:debug --tag=form.type</info><br/> <br/> Use the --parameters option to display all parameters:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console container:debug --parameters</info><br/> <br/> Display a specific parameter by specifying his name with the --parameter option:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console container:debug --parameter=kernel.debug</info>]]></help>
+    <params>name[=null]</params>
+  </command>
+  <command>
+    <name>doctrine:cache:clear-metadata</name>
+    <help><![CDATA[The <info>doctrine:cache:clear-metadata</info> command clears all metadata<br/> cache for the default entity manager:<br/> <br/> <info>php app/console doctrine:cache:clear-metadata</info><br/> <br/> You can also optionally specify the <comment>--em</comment> option to specify<br/> which entity manager to clear the cache for:<br/> <br/> <info>php app/console doctrine:cache:clear-metadata --em=default</info>]]></help>
+  </command>
+  <command>
+    <name>doctrine:cache:clear-query</name>
+    <help><![CDATA[The <info>doctrine:cache:clear-query</info> command clears all query cache for<br/> the default entity manager:<br/> <br/> <info>php app/console doctrine:cache:clear-query</info><br/> <br/> You can also optionally specify the <comment>--em</comment> option to specify<br/> which entity manager to clear the cache for:<br/> <br/> <info>php app/console doctrine:cache:clear-query --em=default</info>]]></help>
+  </command>
+  <command>
+    <name>doctrine:cache:clear-result</name>
+    <help><![CDATA[The <info>doctrine:cache:clear-result</info> command clears all result cache<br/> for the default entity manager:<br/> <br/> <info>php app/console doctrine:cache:clear-result</info><br/> <br/> You can also optionally specify the <comment>--em</comment> option to specify<br/> which entity manager to clear the cache for:<br/> <br/> <info>php app/console doctrine:cache:clear-result --em=default</info>]]></help>
+  </command>
+  <command>
+    <name>doctrine:database:create</name>
+    <help><![CDATA[The <info>doctrine:database:create</info> command creates the default<br/> connections database:<br/> <br/> <info>php app/console doctrine:database:create</info><br/> <br/> You can also optionally specify the name of a connection to create the<br/> database for:<br/> <br/> <info>php app/console doctrine:database:create --connection=default</info>]]></help>
+  </command>
+  <command>
+    <name>doctrine:database:drop</name>
+    <help><![CDATA[The <info>doctrine:database:drop</info> command drops the default connections<br/> database:<br/> <br/> <info>php app/console doctrine:database:drop</info><br/> <br/> The --force parameter has to be used to actually drop the database.<br/> <br/> You can also optionally specify the name of a connection to drop the database<br/> for:<br/> <br/> <info>php app/console doctrine:database:drop --connection=default</info><br/> <br/> <error>Be careful: All data in a given database will be lost when executing<br/> this command.</error>]]></help>
+  </command>
+  <command>
+    <name>doctrine:ensure-production-settings</name>
+    <help><![CDATA[The <info>doctrine:ensure-production-settings</info> command ensures that<br/> Doctrine is properly configured for a production environment.:<br/> <br/> <info>php app/console doctrine:ensure-production-settings</info><br/> <br/> You can also optionally specify the <comment>--em</comment> option to specify<br/> which entity manager to use:<br/> <br/> <info>php app/console doctrine:ensure-production-settings --em=default</info>]]></help>
+  </command>
+  <command>
+    <name>doctrine:generate:crud</name>
+    <help><![CDATA[The <info>doctrine:generate:crud</info> command generates a CRUD based on a Doctrine entity.<br/> <br/> The default command only generates the list and show actions.<br/> <br/> <info>php app/console doctrine:generate:crud --entity=AcmeBlogBundle:Post --route-prefix=post_admin</info><br/> <br/> Using the --with-write option allows to generate the new, edit and delete actions.<br/> <br/> <info>php app/console doctrine:generate:crud --entity=AcmeBlogBundle:Post --route-prefix=post_admin --with-write</info><br/> <br/> Every generated file is based on a template. There are default templates but they can be overriden by placing custom templates in one of the following locations, by order of priority:<br/> <br/> <info>BUNDLE_PATH/Resources/SensioGeneratorBundle/skeleton/crud<br/> APP_PATH/Resources/SensioGeneratorBundle/skeleton/crud</info><br/> <br/> And<br/> <br/> <info>__bundle_path__/Resources/SensioGeneratorBundle/skeleton/form<br/> __project_root__/app/Resources/SensioGeneratorBundle/skeleton/form</info><br/> <br/> You can check https://github.com/sensio/SensioGeneratorBundle/tree/master/Resources/skeleton<br/> in order to know the file structure of the skeleton]]></help>
+  </command>
+  <command>
+    <name>generate:doctrine:crud</name>
+    <help><![CDATA[The <info>doctrine:generate:crud</info> command generates a CRUD based on a Doctrine entity.<br/> <br/> The default command only generates the list and show actions.<br/> <br/> <info>php app/console doctrine:generate:crud --entity=AcmeBlogBundle:Post --route-prefix=post_admin</info><br/> <br/> Using the --with-write option allows to generate the new, edit and delete actions.<br/> <br/> <info>php app/console doctrine:generate:crud --entity=AcmeBlogBundle:Post --route-prefix=post_admin --with-write</info><br/> <br/> Every generated file is based on a template. There are default templates but they can be overriden by placing custom templates in one of the following locations, by order of priority:<br/> <br/> <info>BUNDLE_PATH/Resources/SensioGeneratorBundle/skeleton/crud<br/> APP_PATH/Resources/SensioGeneratorBundle/skeleton/crud</info><br/> <br/> And<br/> <br/> <info>__bundle_path__/Resources/SensioGeneratorBundle/skeleton/form<br/> __project_root__/app/Resources/SensioGeneratorBundle/skeleton/form</info><br/> <br/> You can check https://github.com/sensio/SensioGeneratorBundle/tree/master/Resources/skeleton<br/> in order to know the file structure of the skeleton]]></help>
+  </command>
+  <command>
+    <name>doctrine:generate:entities</name>
+    <help><![CDATA[The <info>doctrine:generate:entities</info> command generates entity classes<br/> and method stubs from your mapping information:<br/> <br/> You have to limit generation of entities:<br/> <br/> * To a bundle:<br/> <br/> <info>php app/console doctrine:generate:entities MyCustomBundle</info><br/> <br/> * To a single entity:<br/> <br/> <info>php app/console doctrine:generate:entities MyCustomBundle:User</info><br/> <info>php app/console doctrine:generate:entities MyCustomBundle/Entity/User</info><br/> <br/> * To a namespace<br/> <br/> <info>php app/console doctrine:generate:entities MyCustomBundle/Entity</info><br/> <br/> If the entities are not stored in a bundle, and if the classes do not exist,<br/> the command has no way to guess where they should be generated. In this case,<br/> you must provide the <comment>--path</comment> option:<br/> <br/> <info>php app/console doctrine:generate:entities Blog/Entity --path=src/</info><br/> <br/> By default, the unmodified version of each entity is backed up and saved<br/> (e.g. Product.php~). To prevent this task from creating the backup file,<br/> pass the <comment>--no-backup</comment> option:<br/> <br/> <info>php app/console doctrine:generate:entities Blog/Entity --no-backup</info><br/> <br/> <error>Important:</error> Even if you specified Inheritance options in your<br/> XML or YAML Mapping files the generator cannot generate the base and<br/> child classes for you correctly, because it doesn't know which<br/> class is supposed to extend which. You have to adjust the entity<br/> code manually for inheritance to work!<br/>]]></help>
+    <params>name</params>
+  </command>
+  <command>
+    <name>generate:doctrine:entities</name>
+    <help><![CDATA[The <info>doctrine:generate:entities</info> command generates entity classes<br/> and method stubs from your mapping information:<br/> <br/> You have to limit generation of entities:<br/> <br/> * To a bundle:<br/> <br/> <info>php app/console doctrine:generate:entities MyCustomBundle</info><br/> <br/> * To a single entity:<br/> <br/> <info>php app/console doctrine:generate:entities MyCustomBundle:User</info><br/> <info>php app/console doctrine:generate:entities MyCustomBundle/Entity/User</info><br/> <br/> * To a namespace<br/> <br/> <info>php app/console doctrine:generate:entities MyCustomBundle/Entity</info><br/> <br/> If the entities are not stored in a bundle, and if the classes do not exist,<br/> the command has no way to guess where they should be generated. In this case,<br/> you must provide the <comment>--path</comment> option:<br/> <br/> <info>php app/console doctrine:generate:entities Blog/Entity --path=src/</info><br/> <br/> By default, the unmodified version of each entity is backed up and saved<br/> (e.g. Product.php~). To prevent this task from creating the backup file,<br/> pass the <comment>--no-backup</comment> option:<br/> <br/> <info>php app/console doctrine:generate:entities Blog/Entity --no-backup</info><br/> <br/> <error>Important:</error> Even if you specified Inheritance options in your<br/> XML or YAML Mapping files the generator cannot generate the base and<br/> child classes for you correctly, because it doesn't know which<br/> class is supposed to extend which. You have to adjust the entity<br/> code manually for inheritance to work!<br/>]]></help>
+    <params>name</params>
+  </command>
+  <command>
+    <name>doctrine:generate:entity</name>
+    <help><![CDATA[The <info>doctrine:generate:entity</info> task generates a new Doctrine<br/> entity inside a bundle:<br/> <br/> <info>php app/console doctrine:generate:entity --entity=AcmeBlogBundle:Blog/Post</info><br/> <br/> The above command would initialize a new entity in the following entity<br/> namespace <info>Acme\BlogBundle\Entity\Blog\Post</info>.<br/> <br/> You can also optionally specify the fields you want to generate in the new<br/> entity:<br/> <br/> <info>php app/console doctrine:generate:entity --entity=AcmeBlogBundle:Blog/Post --fields="title:string(255) body:text"</info><br/> <br/> The command can also generate the corresponding entity repository class with the<br/> <comment>--with-repository</comment> option:<br/> <br/> <info>php app/console doctrine:generate:entity --entity=AcmeBlogBundle:Blog/Post --with-repository</info><br/> <br/> By default, the command uses annotations for the mapping information; change it<br/> with <comment>--format</comment>:<br/> <br/> <info>php app/console doctrine:generate:entity --entity=AcmeBlogBundle:Blog/Post --format=yml</info><br/> <br/> To deactivate the interaction mode, simply use the `--no-interaction` option<br/> without forgetting to pass all needed options:<br/> <br/> <info>php app/console doctrine:generate:entity --entity=AcmeBlogBundle:Blog/Post --format=annotation --fields="title:string(255) body:text" --with-repository --no-interaction</info>]]></help>
+  </command>
+  <command>
+    <name>generate:doctrine:entity</name>
+    <help><![CDATA[The <info>doctrine:generate:entity</info> task generates a new Doctrine<br/> entity inside a bundle:<br/> <br/> <info>php app/console doctrine:generate:entity --entity=AcmeBlogBundle:Blog/Post</info><br/> <br/> The above command would initialize a new entity in the following entity<br/> namespace <info>Acme\BlogBundle\Entity\Blog\Post</info>.<br/> <br/> You can also optionally specify the fields you want to generate in the new<br/> entity:<br/> <br/> <info>php app/console doctrine:generate:entity --entity=AcmeBlogBundle:Blog/Post --fields="title:string(255) body:text"</info><br/> <br/> The command can also generate the corresponding entity repository class with the<br/> <comment>--with-repository</comment> option:<br/> <br/> <info>php app/console doctrine:generate:entity --entity=AcmeBlogBundle:Blog/Post --with-repository</info><br/> <br/> By default, the command uses annotations for the mapping information; change it<br/> with <comment>--format</comment>:<br/> <br/> <info>php app/console doctrine:generate:entity --entity=AcmeBlogBundle:Blog/Post --format=yml</info><br/> <br/> To deactivate the interaction mode, simply use the `--no-interaction` option<br/> without forgetting to pass all needed options:<br/> <br/> <info>php app/console doctrine:generate:entity --entity=AcmeBlogBundle:Blog/Post --format=annotation --fields="title:string(255) body:text" --with-repository --no-interaction</info>]]></help>
+  </command>
+  <command>
+    <name>doctrine:generate:form</name>
+    <help><![CDATA[The <info>doctrine:generate:form</info> command generates a form class based on a Doctrine entity.<br/> <br/> <info>php app/console doctrine:generate:form AcmeBlogBundle:Post</info><br/> <br/> Every generated file is based on a template. There are default templates but they can be overriden by placing custom templates in one of the following locations, by order of priority:<br/> <br/> <info>BUNDLE_PATH/Resources/SensioGeneratorBundle/skeleton/form<br/> APP_PATH/Resources/SensioGeneratorBundle/skeleton/form</info><br/> <br/> You can check https://github.com/sensio/SensioGeneratorBundle/tree/master/Resources/skeleton<br/> in order to know the file structure of the skeleton]]></help>
+    <params>entity</params>
+  </command>
+  <command>
+    <name>generate:doctrine:form</name>
+    <help><![CDATA[The <info>doctrine:generate:form</info> command generates a form class based on a Doctrine entity.<br/> <br/> <info>php app/console doctrine:generate:form AcmeBlogBundle:Post</info><br/> <br/> Every generated file is based on a template. There are default templates but they can be overriden by placing custom templates in one of the following locations, by order of priority:<br/> <br/> <info>BUNDLE_PATH/Resources/SensioGeneratorBundle/skeleton/form<br/> APP_PATH/Resources/SensioGeneratorBundle/skeleton/form</info><br/> <br/> You can check https://github.com/sensio/SensioGeneratorBundle/tree/master/Resources/skeleton<br/> in order to know the file structure of the skeleton]]></help>
+    <params>entity</params>
+  </command>
+  <command>
+    <name>doctrine:mapping:convert</name>
+    <help><![CDATA[The <info>doctrine:mapping:convert</info> command converts mapping information<br/> between supported formats:<br/> <br/> <info>php app/console doctrine:mapping:convert xml /path/to/output</info>]]></help>
+    <params>to-type dest-path</params>
+  </command>
+  <command>
+    <name>doctrine:mapping:import</name>
+    <help><![CDATA[The <info>doctrine:mapping:import</info> command imports mapping information<br/> from an existing database:<br/> <br/> <info>php app/console doctrine:mapping:import "MyCustomBundle" xml</info><br/> <br/> You can also optionally specify which entity manager to import from with the<br/> <info>--em</info> option:<br/> <br/> <info>php app/console doctrine:mapping:import "MyCustomBundle" xml --em=default</info><br/> <br/> If you don't want to map every entity that can be found in the database, use the<br/> <info>--filter</info> option. It will try to match the targeted mapped entity with the<br/> provided pattern string.<br/> <br/> <info>php app/console doctrine:mapping:import "MyCustomBundle" xml --filter=MyMatchedEntity</info><br/> <br/> Use the <info>--force</info> option, if you want to override existing mapping files:<br/> <br/> <info>php app/console doctrine:mapping:import "MyCustomBundle" xml --force</info>]]></help>
+    <params>bundle mapping-type[=null]</params>
+  </command>
+  <command>
+    <name>doctrine:mapping:info</name>
+    <help><![CDATA[The <info>doctrine:mapping:info</info> shows basic information about which<br/> entities exist and possibly if their mapping information contains errors or<br/> not.<br/> <br/> <info>php app/console doctrine:mapping:info</info><br/> <br/> If you are using multiple entity managers you can pick your choice with the<br/> <info>--em</info> option:<br/> <br/> <info>php app/console doctrine:mapping:info --em=default</info>]]></help>
+  </command>
+  <command>
+    <name>doctrine:query:dql</name>
+    <help><![CDATA[The <info>doctrine:query:dql</info> command executes the given DQL query and<br/> outputs the results:<br/> <br/> <info>php app/console doctrine:query:dql "SELECT u FROM UserBundle:User u"</info><br/> <br/> You can also optional specify some additional options like what type of<br/> hydration to use when executing the query:<br/> <br/> <info>php app/console doctrine:query:dql "SELECT u FROM UserBundle:User u" --hydrate=array</info><br/> <br/> Additionally you can specify the first result and maximum amount of results to<br/> show:<br/> <br/> <info>php app/console doctrine:query:dql "SELECT u FROM UserBundle:User u" --first-result=0 --max-result=30</info>]]></help>
+    <params>dql</params>
+  </command>
+  <command>
+    <name>doctrine:query:sql</name>
+    <help><![CDATA[The <info>doctrine:query:sql</info> command executes the given SQL query and<br/> outputs the results:<br/> <br/> <info>php app/console doctrine:query:sql "SELECT * from user"</info>]]></help>
+    <params>sql</params>
+  </command>
+  <command>
+    <name>doctrine:schema:create</name>
+    <help><![CDATA[The <info>doctrine:schema:create</info> command executes the SQL needed to<br/> generate the database schema for the default entity manager:<br/> <br/> <info>php app/console doctrine:schema:create</info><br/> <br/> You can also generate the database schema for a specific entity manager:<br/> <br/> <info>php app/console doctrine:schema:create --em=default</info><br/> <br/> Finally, instead of executing the SQL, you can output the SQL:<br/> <br/> <info>php app/console doctrine:schema:create --dump-sql</info>]]></help>
+  </command>
+  <command>
+    <name>doctrine:schema:drop</name>
+    <help><![CDATA[The <info>doctrine:schema:drop</info> command generates the SQL needed to<br/> drop the database schema of the default entity manager:<br/> <br/> <info>php app/console doctrine:schema:drop --dump-sql</info><br/> <br/> Alternatively, you can execute the generated queries:<br/> <br/> <info>php app/console doctrine:schema:drop --force</info><br/> <br/> You can also optionally specify the name of a entity manager to drop the<br/> schema for:<br/> <br/> <info>php app/console doctrine:schema:drop --em=default</info>]]></help>
+  </command>
+  <command>
+    <name>doctrine:schema:update</name>
+    <help><![CDATA[The <info>doctrine:schema:update</info> command generates the SQL needed to<br/> synchronize the database schema with the current mapping metadata of the<br/> default entity manager.<br/> <br/> For example, if you add metadata for a new column to an entity, this command<br/> would generate and output the SQL needed to add the new column to the database:<br/> <br/> <info>php app/console doctrine:schema:update --dump-sql</info><br/> <br/> Alternatively, you can execute the generated queries:<br/> <br/> <info>php app/console doctrine:schema:update --force</info><br/> <br/> You can also update the database schema for a specific entity manager:<br/> <br/> <info>php app/console doctrine:schema:update --em=default</info>]]></help>
+  </command>
+  <command>
+    <name>doctrine:schema:validate</name>
+    <help><![CDATA[The <info>doctrine:schema:validate</info> checks the current mappings<br/> for valid forward and reverse mappings.<br/> <br/> <info>php app/console doctrine:schema:validate</info><br/> <br/> You can also optionally specify the <comment>--em</comment> option to specify<br/> which entity manager use for the validation.<br/> <br/> <info>php app/console doctrine:schema:validate --em=default</info>]]></help>
+  </command>
+  <command>
+    <name>generate:bundle</name>
+    <help><![CDATA[The <info>generate:bundle</info> command helps you generates new bundles.<br/> <br/> By default, the command interacts with the developer to tweak the generation.<br/> Any passed option will be used as a default value for the interaction<br/> (<comment>--namespace</comment> is the only one needed if you follow the<br/> conventions):<br/> <br/> <info>php app/console generate:bundle --namespace=Acme/BlogBundle</info><br/> <br/> Note that you can use <comment>/</comment> instead of <comment>\ </comment>for the namespace delimiter to avoid any<br/> problem.<br/> <br/> If you want to disable any user interaction, use <comment>--no-interaction</comment> but don't forget to pass all needed options:<br/> <br/> <info>php app/console generate:bundle --namespace=Acme/BlogBundle --dir=src [--bundle-name=...] --no-interaction</info><br/> <br/> Note that the bundle namespace must end with "Bundle".]]></help>
+  </command>
+  <command>
+    <name>generate:controller</name>
+    <help><![CDATA[The <info>generate:controller</info> command helps you generates new controllers<br/> inside bundles.<br/> <br/> By default, the command interacts with the developer to tweak the generation.<br/> Any passed option will be used as a default value for the interaction<br/> (<comment>--bundle</comment> and <comment>--controller</comment> are the only<br/> ones needed if you follow the conventions):<br/> <br/> <info>php app/console generate:controller --controller=AcmeBlogBundle:Post</info><br/> <br/> If you want to disable any user interaction, use <comment>--no-interaction</comment><br/> but don't forget to pass all needed options:<br/> <br/> <info>php app/console generate:controller --controller=AcmeBlogBundle:Post --no-interaction</info><br/> <br/> Every generated file is based on a template. There are default templates but they can<br/> be overriden by placing custom templates in one of the following locations, by order of priority:<br/> <br/> <info>BUNDLE_PATH/Resources/SensioGeneratorBundle/skeleton/controller<br/> APP_PATH/Resources/SensioGeneratorBundle/skeleton/controller</info><br/> <br/> You can check https://github.com/sensio/SensioGeneratorBundle/tree/master/Resources/skeleton<br/> in order to know the file structure of the skeleton]]></help>
+  </command>
+  <command>
+    <name>init:acl</name>
+    <help><![CDATA[The <info>init:acl</info> command mounts ACL tables in the database.<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console init:acl</info><br/> <br/> The name of the DBAL connection must be configured in your <info>app/config/security.yml</info> configuration file in the <info>security.acl.connection</info> variable.<br/> <br/> <info>security:<br/> acl:<br/> connection: default</info>]]></help>
+  </command>
+  <command>
+    <name>router:debug</name>
+    <help><![CDATA[The <info>router:debug</info> displays the configured routes:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console router:debug</info>]]></help>
+    <params>name[=null]</params>
+  </command>
+  <command>
+    <name>router:dump-apache</name>
+    <help><![CDATA[The <info>router:dump-apache</info> dumps all routes as Apache rewrite rules.<br/> These can then be used with the ApacheUrlMatcher to use Apache for route<br/> matching.<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console router:dump-apache</info>]]></help>
+    <params>script_name[=null]</params>
+  </command>
+  <command>
+    <name>router:match</name>
+    <help><![CDATA[The <info>router:match</info> simulates a path info match:<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console router:match /foo</info>]]></help>
+    <params>path_info</params>
+  </command>
+  <command>
+    <name>server:run</name>
+    <help><![CDATA[The <info>server:run</info> runs PHP built-in web server:<br/> <br/> <info>C:\Users\Mohammad\Documents\WebProject\app\console server:run</info><br/> <br/> To change default bind address and port use the <info>address</info> argument:<br/> <br/> <info>C:\Users\Mohammad\Documents\WebProject\app\console server:run 127.0.0.1:8080</info><br/> <br/> To change default docroot directory use the <info>--docroot</info> option:<br/> <br/> <info>C:\Users\Mohammad\Documents\WebProject\app\console server:run --docroot=htdocs/</info><br/> <br/> If you have custom docroot directory layout, you can specify your own<br/> router script using <info>--router</info> option:<br/> <br/> <info>C:\Users\Mohammad\Documents\WebProject\app\console server:run --router=app/config/router.php</info><br/> <br/> See also: http://www.php.net/manual/en/features.commandline.webserver.php]]></help>
+    <params>address[=null]</params>
+  </command>
+  <command>
+    <name>swiftmailer:spool:send</name>
+    <help><![CDATA[The <info>swiftmailer:spool:send</info> command sends all emails from the spool.<br/> <br/> <info>php app/console swiftmailer:spool:send --message-limit=10 --time-limit=10 --recover-timeout=900</info><br/>]]></help>
+  </command>
+  <command>
+    <name>translation:update</name>
+    <help><![CDATA[The <info>translation:update</info> command extract translation strings from templates<br/> of a given bundle. It can display them or merge the new ones into the translation files.<br/> When new translation strings are found it can automatically add a prefix to the translation<br/> message.<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console translation:update --dump-messages en AcmeBundle</info><br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console translation:update --force --prefix="new_" fr AcmeBundle</info>]]></help>
+    <params>locale bundle</params>
+  </command>
+  <command>
+    <name>twig:lint</name>
+    <help><![CDATA[The <info>twig:lint</info> command lints a template and outputs to stdout<br/> the first encountered syntax error.<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console twig:lint filename</info><br/> <br/> The command gets the contents of <comment>filename</comment> and validates its syntax.<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console twig:lint dirname</info><br/> <br/> The command finds all twig templates in <comment>dirname</comment> and validates the syntax<br/> of each Twig template.<br/> <br/> <info>php C:\Users\Mohammad\Documents\WebProject\app\console twig:lint @AcmeMyBundle</info><br/> <br/> The command finds all twig templates in the <comment>AcmeMyBundle</comment> bundle and validates<br/> the syntax of each Twig template.<br/> <br/> <info>cat filename | php C:\Users\Mohammad\Documents\WebProject\app\console twig:lint</info><br/> <br/> The command gets the template contents from stdin and validates its syntax.]]></help>
+    <params>filename[=null]</params>
+  </command>
+  <help><![CDATA[Symfony version 2.3.1 - app/dev/debug<br/><br/>Usage:<br/> [options] command [arguments]<br/><br/>Options:<br/> --help -h Display this help message.<br/> --quiet -q Do not output any message.<br/> --verbose -v|vv|vvv Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug<br/> --version -V Display this application version.<br/> --ansi Force ANSI output.<br/> --no-ansi Disable ANSI output.<br/> --no-interaction -n Do not ask any interactive question.<br/> --shell -s Launch the shell.<br/> --process-isolation Launch commands from shell as a separate process.<br/> --env -e The Environment name.<br/> --no-debug Switches off debug mode.<br/><br/>Available commands:<br/> help Displays help for a command<br/> list Lists commands<br/>assetic<br/> assetic:dump Dumps all assets to the filesystem<br/>assets<br/> assets:install Installs bundles web assets under a public web directory<br/>cache<br/> cache:clear Clears the cache<br/> cache:warmup Warms up an empty cache<br/>config<br/> config:dump-reference Dumps default configuration for an extension<br/>container<br/> container:debug Displays current services for an application<br/>doctrine<br/> doctrine:cache:clear-metadata Clears all metadata cache for an entity manager<br/> doctrine:cache:clear-query Clears all query cache for an entity manager<br/> doctrine:cache:clear-result Clears result cache for an entity manager<br/> doctrine:database:create Creates the configured databases<br/> doctrine:database:drop Drops the configured databases<br/> doctrine:ensure-production-settings Verify that Doctrine is properly configured for a production environment.<br/> doctrine:generate:crud Generates a CRUD based on a Doctrine entity<br/> doctrine:generate:entities Generates entity classes and method stubs from your mapping information<br/> doctrine:generate:entity Generates a new Doctrine entity inside a bundle<br/> doctrine:generate:form Generates a form type class based on a Doctrine entity<br/> doctrine:mapping:convert Convert mapping information between supported formats.<br/> doctrine:mapping:import Imports mapping information from an existing database<br/> doctrine:mapping:info Shows basic information about all mapped entities<br/> doctrine:query:dql Executes arbitrary DQL directly from the command line.<br/> doctrine:query:sql Executes arbitrary SQL directly from the command line.<br/> doctrine:schema:create Executes (or dumps) the SQL needed to generate the database schema<br/> doctrine:schema:drop Executes (or dumps) the SQL needed to drop the current database schema<br/> doctrine:schema:update Executes (or dumps) the SQL needed to update the database schema to match the current mapping metadata<br/> doctrine:schema:validate Validates the doctrine mapping files<br/>generate<br/> generate:bundle Generates a bundle<br/> generate:controller Generates a controller<br/> generate:doctrine:crud Generates a CRUD based on a Doctrine entity<br/> generate:doctrine:entities Generates entity classes and method stubs from your mapping information<br/> generate:doctrine:entity Generates a new Doctrine entity inside a bundle<br/> generate:doctrine:form Generates a form type class based on a Doctrine entity<br/>init<br/> init:acl Mounts ACL tables in the database<br/>router<br/> router:debug Displays current routes for an application<br/> router:dump-apache Dumps all routes as Apache rewrite rules<br/> router:match Helps debug routes by simulating a path info match<br/>server<br/> server:run Runs PHP built-in web server<br/>swiftmailer<br/> swiftmailer:spool:send Sends emails from the spool<br/>translation<br/> translation:update Updates the translation file<br/>twig<br/> twig:lint Lints a template and outputs encountered errors<br/>]]></help>
+</framework>
+
