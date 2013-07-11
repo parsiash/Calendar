@@ -1,0 +1,4 @@
+ce_test:
+    resource: "@CETestBundle/Resources/config/routing.yml"
+    prefix:   /
+

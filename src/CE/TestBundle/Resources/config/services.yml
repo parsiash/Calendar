@@ -1,0 +1,7 @@
+parameters:
+#    ce_test.example.class: CE\TestBundle\Example
+
+services:
+#    ce_test.example:
+#        class: %ce_test.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
