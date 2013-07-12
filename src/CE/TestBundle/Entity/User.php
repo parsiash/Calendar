@@ -32,7 +32,7 @@ class User extends BaseUser
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="Event", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Calendar", mappedBy="user")
      */
     private $calendars;
 
