@@ -3,14 +3,15 @@
 namespace CE\TestBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
  *
- * @ORM\Table()
+ * @ORM\Table(name="fos_user")
  * @ORM\Entity
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var integer
@@ -94,6 +95,7 @@ class User
      */
     public function __construct()
     {
+        parent::__construct();
         $this->events = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
