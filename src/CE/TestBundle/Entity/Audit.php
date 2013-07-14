@@ -50,6 +50,13 @@ class Audit
     private $user;
 
     /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="user")
+     */
+    private $categories;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -149,5 +156,45 @@ class Audit
     public function getUser()
     {
         return $this->user;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add categories
+     *
+     * @param \CE\TestBundle\Entity\Category $categories
+     * @return Audit
+     */
+    public function addCategorie(\CE\TestBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \CE\TestBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\CE\TestBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }
