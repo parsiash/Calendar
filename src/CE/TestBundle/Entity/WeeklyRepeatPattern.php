@@ -28,7 +28,6 @@ class WeeklyRepeatPattern extends RepeatPattern
      */
     private $weekday;
 
-
     /**
      * Get id
      *

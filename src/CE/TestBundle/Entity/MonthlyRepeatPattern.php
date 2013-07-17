@@ -23,12 +23,6 @@ class MonthlyRepeatPattern extends RepeatPattern
 
     /**
      * @var integer
-     * @ORM\Column(name="day", type="integer")
-     */
-    private $day;
-
-    /**
-     * @var integer
      * @ORM\Column(name="weeknumber", type="integer")
      */
     private $weekNumber;
@@ -47,29 +41,6 @@ class MonthlyRepeatPattern extends RepeatPattern
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set day
-     *
-     * @param integer $day
-     * @return MonthlyRepeatPattern
-     */
-    public function setDay($day)
-    {
-        $this->day = $day;
-    
-        return $this;
-    }
-
-    /**
-     * Get day
-     *
-     * @return integer 
-     */
-    public function getDay()
-    {
-        return $this->day;
     }
 
     /**

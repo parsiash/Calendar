@@ -2,17 +2,22 @@
 
 namespace CE\TestBundle\Controller;
 
-use CE\TestBundle\Entity\ClassTime;
-use CE\TestBundle\Entity\Course;
-use CE\TestBundle\Entity\Semester;
-use CE\TestBundle\Entity\User;
-use CE\TestBundle\Entity\WeeklyRepeatPattern;
+use DateTimeZone;
+use IntlDateFormatter;
+use IntlCalendar;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
     public function indexAction($name)
     {
-        return $this->render('CETestBundle:Default:index.html.twig', array('name' => $name));
+        $formatter = IntlDateFormatter::create(
+            "fa_IR",
+            IntlDateFormatter::LONG,
+            IntlDateFormatter::MEDIUM,
+            new DateTimeZone('Iran'),
+            IntlCalendar::createInstance(NULL, '@calendar=persian'));
+
+        return $this->render('CETestBundle:Default:index.html.twig', array('name' => $formatter->format(new \DateTime())));
     }
 }

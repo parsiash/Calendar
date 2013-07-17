@@ -31,9 +31,9 @@ class Category
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Audit", inversedBy="categories")
+     * @ORM\OneToMany(targetEntity="Audit", mappedBy="category")
      */
-    private $user;
+    private $audits;
 
     /**
      * Get id
@@ -69,25 +69,43 @@ class Category
     }
 
     /**
-     * Set user
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->audits = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add audits
      *
-     * @param \CE\TestBundle\Entity\Audit $user
+     * @param \CE\TestBundle\Entity\Audit $audits
      * @return Category
      */
-    public function setUser(\CE\TestBundle\Entity\Audit $user = null)
+    public function addAudit(\CE\TestBundle\Entity\Audit $audits)
     {
-        $this->user = $user;
+        $this->audits[] = $audits;
     
         return $this;
     }
 
     /**
-     * Get user
+     * Remove audits
      *
-     * @return \CE\TestBundle\Entity\Audit 
+     * @param \CE\TestBundle\Entity\Audit $audits
      */
-    public function getUser()
+    public function removeAudit(\CE\TestBundle\Entity\Audit $audits)
     {
-        return $this->user;
+        $this->audits->removeElement($audits);
+    }
+
+    /**
+     * Get audits
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAudits()
+    {
+        return $this->audits;
     }
 }

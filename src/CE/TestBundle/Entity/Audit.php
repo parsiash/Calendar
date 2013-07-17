@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Audit
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CE\TestBundle\Entity\AuditRepository")
  */
 class Audit
 {
@@ -52,9 +52,9 @@ class Audit
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="user")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="audits")
      */
-    private $categories;
+    private $category;
 
     /**
      * Get id
@@ -75,7 +75,7 @@ class Audit
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -164,37 +164,27 @@ class Audit
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
-     * Add categories
+     * Set category
      *
-     * @param \CE\TestBundle\Entity\Category $categories
+     * @param \CE\TestBundle\Entity\Category $category
      * @return Audit
      */
-    public function addCategorie(\CE\TestBundle\Entity\Category $categories)
+    public function setCategory(\CE\TestBundle\Entity\Category $category = null)
     {
-        $this->categories[] = $categories;
+        $this->category = $category;
     
         return $this;
     }
 
     /**
-     * Remove categories
+     * Get category
      *
-     * @param \CE\TestBundle\Entity\Category $categories
+     * @return \CE\TestBundle\Entity\Category 
      */
-    public function removeCategorie(\CE\TestBundle\Entity\Category $categories)
+    public function getCategory()
     {
-        $this->categories->removeElement($categories);
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCategories()
-    {
-        return $this->categories;
+        return $this->category;
     }
 }

@@ -52,16 +52,24 @@ class Event
     /**
      * @var integer
      *
-     * @ORM\Column(name="numAppointments", type="integer")
+     * @ORM\Column(name="numAppointments", type="integer", nullable=true)
      */
     private $numAppointments;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="untilDate", type="date")
+     * @ORM\Column(name="untilDate", type="date", nullable=true)
      */
     private $untilDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="color", type="string", length=6)
+     */
+    private $color;
+
 
     /**
      * @var
@@ -346,5 +354,28 @@ class Event
     public function getCalendar()
     {
         return $this->calendar;
+    }
+
+    /**
+     * Set color
+     *
+     * @param string $color
+     * @return Event
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+    
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @return string 
+     */
+    public function getColor()
+    {
+        return $this->color;
     }
 }
