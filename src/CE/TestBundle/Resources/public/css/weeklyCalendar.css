@@ -1,0 +1,49 @@
+#weeklyCalendar{
+    width: 100%;
+    position: relative;
+}
+#weeklyCalendar td,th{
+    text-align: center;
+    width: 140px;
+}
+
+#weeklyCalendar td{
+    cursor: pointer;
+}
+
+#weeklyCalendarContainer{
+    width: 100%;
+    overflow: scroll;
+    height: 500px;
+
+}
+
+.timeUnit{
+    padding: 0px !important;
+    background-color: white;
+    position: relative;
+}
+.eventPanel{
+    position: absolute;
+    text-align: center;
+    width: 10%;
+    z-index: 1;
+}
+
+.resizeArea{
+    height: 4px;
+    width: 100%;
+    font-size: 4%;
+    cursor:n-resize;
+    background-color: black;
+    color: white;
+    border-radius : 4px;
+}
+.eventTitleContainer{
+    border-radius : 4px;
+    height:97%;
+    width:100%;
+}
+body{
+    direction: rtl;
+}

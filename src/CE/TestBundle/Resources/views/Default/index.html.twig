@@ -1,1 +1,18 @@
-Hello {{ name }}!
+{% extends "CETestBundle::layout.html.twig" %}
+{% block stylesheets%}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("bundles/cetest/css/weeklyCalendar.css") }}">
+{% endblock %}
+{% block headjs %}
+    {{ parent() }}
+    <script src="{{ asset("bundles/cetest/js/weeklyCalendarGenerator.js") }}"></script>
+{% endblock %}
+{% block  body%}
+    {{ parent() }}
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var weeklyCalendarContainer = generateWeeklyCalendar();
+        document.getElementById("content").appendChild(weeklyCalendarContainer);
+    </script>
+{% endblock %}

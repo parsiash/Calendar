@@ -1,0 +1,40 @@
+{% extends "::base.html.twig"%}
+{% block title %}
+    Welcome to Calendar
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("bundles/cetest/bootstrap/bootstrap-rtl.min.css") }}">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row-fluid" id="top">
+            <div class="navbar span12">
+                <div class="navbar-inner">
+                    <ul class="nav">
+                        <li>
+                            <a href="google.com">Home</a>
+                        </li>
+                        <li>
+                           <a href="google.com"> calendars</a>
+                        </li>
+                        <li>
+                            <a href="google.com">
+                                Profile
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div  class="row-fluid">
+            <div class="span2" style="background-color: khaki; height: 500px;">
+                sd
+            </div>
+            <div id="content" class="span10" >
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block headjs %}
+    <script src="{{ asset("js/jquery.js") }}"></script>
+{% endblock %}
