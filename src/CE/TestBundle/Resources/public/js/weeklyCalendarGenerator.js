@@ -280,3 +280,12 @@ function timeUnitCellGenerator(timeUnitIndex){
     cell.id = "timeUnit-" + timeUnitIndex;
     return cell;
 }
+
+
+
+/**
+ * ajax functions
+ * */
+function ajaxLoadCalendar(){
+
+}
