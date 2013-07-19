@@ -36,7 +36,11 @@ class UserRepository extends EntityRepository
                 if ($this->dailyRepeatPatternResolver($date, $event))
                     array_push($eventList, $event);
             }
-            else if ($repeatPattern instanceof MonthlyRepeatPattern) {
+            elseif ($repeatPattern instanceof WeeklyRepeatPattern) {
+                if ($this->weeklyRepeatPatternResolver($date, $event))
+                    array_push($eventList, $event);
+            }
+            elseif ($repeatPattern instanceof MonthlyRepeatPattern) {
                 if ($this->monthlyRepeatPatternResolver($date, $event))
                     array_push($eventList, $event);
             }
@@ -59,7 +63,7 @@ class UserRepository extends EntityRepository
             if (floor($end_diff / $period) >= floor($start_diff / $period))
                 return true;
         }
-        else if (is_null($event->getUntilDate())) {
+        elseif (is_null($event->getUntilDate())) {
             if ((floor($end_diff / $period) >= ceil($start_diff / $period))
                 && ceil($start_diff / $period) <= $event->getNumAppointments())
                 return true;
@@ -74,19 +78,57 @@ class UserRepository extends EntityRepository
      */
     private function monthlyRepeatPatternResolver(\DateTime $date, Event $event)
     {
+        /** @var $repeatPattern MonthlyRepeatPattern */
         $repeatPattern = $event->getRepeatPattern();
-        $start_diff = floatval($date->diff($event->getStart())->format("%a"));
-        $end_diff = floatval($date->add(new \DateInterval("P7D"))->diff($event->getStart())->format("%a"));
-        $period = floatval($repeatPattern->getPeriod());
+        $period = intval($repeatPattern->getPeriod());
 
         if (is_null($event->getUntilDate()) && is_null($event->getNumAppointments())) {
-            if (floor($end_diff / $period) >= floor($start_diff / $period))
-                return true;
+            if ($date->diff($event->getStart())->m % $period == 0) {
+                $formatter = \IntlDateFormatter::create(
+                    'en_US', \IntlDateFormatter::FULL, \IntlDateFormatter::NONE, new \DateTimeZone('Iran'),
+                    \IntlDateFormatter::GREGORIAN, 'W'
+                );
+                $dateWeekNum = intval($formatter->format($date));
+                if ($repeatPattern->getWeekNumber() == $dateWeekNum)
+                    return true;
+            }
         }
-        else if (is_null($event->getUntilDate())) {
-            if ((floor($end_diff / $period) >= ceil($start_diff / $period))
-                && ceil($start_diff / $period) <= $event->getNumAppointments())
+        elseif (is_null($event->getUntilDate())) {
+            $m = $date->diff($event->getStart())->m;
+            if ($m % $period == 0 && $m / $period <= $event->getNumAppointments()) {
+                $formatter = \IntlDateFormatter::create(
+                    'en_US', \IntlDateFormatter::FULL, \IntlDateFormatter::NONE, new \DateTimeZone('Iran'),
+                    \IntlDateFormatter::GREGORIAN, 'W'
+                );
+                $dateWeekNum = intval($formatter->format($date));
+                if ($repeatPattern->getWeekNumber() == $dateWeekNum)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param \DateTime $date
+     * @param Event $event
+     * @return bool
+     */
+    private function weeklyRepeatPatternResolver(\DateTime $date, Event $event)
+    {
+        /** @var $repeatPattern WeeklyRepeatPattern */
+        $repeatPattern = $event->getRepeatPattern();
+        $period = intval($repeatPattern->getPeriod());
+
+        if (is_null($event->getUntilDate()) && is_null($event->getNumAppointments())) {
+            if ((($date->diff($event->getStart())->d - $repeatPattern->getWeekday()) / 7) % $period == 0) {
                 return true;
+            }
+        }
+        elseif (is_null($event->getUntilDate())) {
+            $w = ($date->diff($event->getStart())->d - $repeatPattern->getWeekday()) / 7;
+            if ($w % $period == 0 && $w <= $event->getNumAppointments()) {
+                return true;
+            }
         }
         return false;
     }
