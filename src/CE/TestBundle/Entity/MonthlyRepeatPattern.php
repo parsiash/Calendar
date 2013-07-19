@@ -88,4 +88,5 @@ class MonthlyRepeatPattern extends RepeatPattern
     {
         return $this->weekday;
     }
+
 }

@@ -74,19 +74,32 @@ class UserRepository extends EntityRepository
      */
     private function monthlyRepeatPatternResolver(\DateTime $date, Event $event)
     {
+        /** @var $repeatPattern MonthlyRepeatPattern */
         $repeatPattern = $event->getRepeatPattern();
-        $start_diff = floatval($date->diff($event->getStart())->format("%a"));
-        $end_diff = floatval($date->add(new \DateInterval("P7D"))->diff($event->getStart())->format("%a"));
-        $period = floatval($repeatPattern->getPeriod());
+        $period = intval($repeatPattern->getPeriod());
 
         if (is_null($event->getUntilDate()) && is_null($event->getNumAppointments())) {
-            if (floor($end_diff / $period) >= floor($start_diff / $period))
-                return true;
+            if ($date->diff($event->getStart())->m % $period == 0) {
+                $formatter = \IntlDateFormatter::create(
+                    'en_US', \IntlDateFormatter::FULL, \IntlDateFormatter::NONE, new \DateTimeZone('Iran'),
+                    \IntlDateFormatter::GREGORIAN, 'W'
+                );
+                $dateWeekNum = intval($formatter->format($date));
+                if ($repeatPattern->getWeekNumber() == $dateWeekNum)
+                    return true;
+            }
         }
         else if (is_null($event->getUntilDate())) {
-            if ((floor($end_diff / $period) >= ceil($start_diff / $period))
-                && ceil($start_diff / $period) <= $event->getNumAppointments())
-                return true;
+            $m = $date->diff($event->getStart())->m;
+            if ($m % $period == 0 && $m / $period <= $event->getNumAppointments()) {
+                $formatter = \IntlDateFormatter::create(
+                    'en_US', \IntlDateFormatter::FULL, \IntlDateFormatter::NONE, new \DateTimeZone('Iran'),
+                    \IntlDateFormatter::GREGORIAN, 'W'
+                );
+                $dateWeekNum = intval($formatter->format($date));
+                if ($repeatPattern->getWeekNumber() == $dateWeekNum)
+                    return true;
+            }
         }
         return false;
     }
