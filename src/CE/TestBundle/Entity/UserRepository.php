@@ -42,7 +42,7 @@ class UserRepository extends EntityRepository
             }
             elseif ($repeatPattern instanceof MonthlyRepeatPattern) {
                 if ($this->monthlyRepeatPatternResolver($date, $event))
-                array_push($eventList, $event);
+                    array_push($eventList, $event);
             }
         }
     }
