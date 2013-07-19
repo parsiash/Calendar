@@ -36,9 +36,13 @@ class UserRepository extends EntityRepository
                 if ($this->dailyRepeatPatternResolver($date, $event))
                     array_push($eventList, $event);
             }
-            else if ($repeatPattern instanceof MonthlyRepeatPattern) {
-                if ($this->monthlyRepeatPatternResolver($date, $event))
+            elseif ($repeatPattern instanceof WeeklyRepeatPattern) {
+                if ($this->weeklyRepeatPatternResolver($date, $event))
                     array_push($eventList, $event);
+            }
+            elseif ($repeatPattern instanceof MonthlyRepeatPattern) {
+                if ($this->monthlyRepeatPatternResolver($date, $event))
+                array_push($eventList, $event);
             }
         }
     }
@@ -59,7 +63,7 @@ class UserRepository extends EntityRepository
             if (floor($end_diff / $period) >= floor($start_diff / $period))
                 return true;
         }
-        else if (is_null($event->getUntilDate())) {
+        elseif (is_null($event->getUntilDate())) {
             if ((floor($end_diff / $period) >= ceil($start_diff / $period))
                 && ceil($start_diff / $period) <= $event->getNumAppointments())
                 return true;
@@ -89,7 +93,7 @@ class UserRepository extends EntityRepository
                     return true;
             }
         }
-        else if (is_null($event->getUntilDate())) {
+        elseif (is_null($event->getUntilDate())) {
             $m = $date->diff($event->getStart())->m;
             if ($m % $period == 0 && $m / $period <= $event->getNumAppointments()) {
                 $formatter = \IntlDateFormatter::create(
@@ -99,6 +103,31 @@ class UserRepository extends EntityRepository
                 $dateWeekNum = intval($formatter->format($date));
                 if ($repeatPattern->getWeekNumber() == $dateWeekNum)
                     return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param \DateTime $date
+     * @param Event $event
+     * @return bool
+     */
+    private function weeklyRepeatPatternResolver(\DateTime $date, Event $event)
+    {
+        /** @var $repeatPattern WeeklyRepeatPattern */
+        $repeatPattern = $event->getRepeatPattern();
+        $period = intval($repeatPattern->getPeriod());
+
+        if (is_null($event->getUntilDate()) && is_null($event->getNumAppointments())) {
+            if ((($date->diff($event->getStart())->d - $repeatPattern->getWeekday()) / 7) % $period == 0) {
+                return true;
+            }
+        }
+        elseif (is_null($event->getUntilDate())) {
+            $w = ($date->diff($event->getStart())->d - $repeatPattern->getWeekday()) / 7;
+            if ($w % $period == 0 && $w <= $event->getNumAppointments()) {
+                return true;
             }
         }
         return false;
