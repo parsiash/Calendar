@@ -3,7 +3,6 @@
 namespace CE\TestBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Tests\DBAL\Types\DateTest;
 
 /**
  * UserRepository
@@ -33,6 +32,8 @@ class UserRepository extends EntityRepository
 
         $results = $query->getResult();
 
+        $eventList = array();
+
         /** @var $event Event */
         foreach ($results as $event) {
             $repeatPattern = $event->getRepeatPattern();
@@ -50,6 +51,8 @@ class UserRepository extends EntityRepository
                     array_push($eventList, $event);
             }
         }
+
+        return $eventList;
     }
 
     public function findAllWeekEvents(\DateTime $date, User $user, Calendar $calendar)

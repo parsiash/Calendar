@@ -2,6 +2,6 @@ ce_test_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: CETestBundle:Default:index }
 
-ce_time_tracker:
-    pattern:  /tracker
-    defaults: { _controller: CETestBundle:TimeTracker:index }
+ce_test_event:
+    pattern:  /event/{cal_id}/{date}
+    defaults: { _controller: CETestBundle:Event:getDateEvent }

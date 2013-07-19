@@ -23,15 +23,28 @@ class MonthlyRepeatPattern extends RepeatPattern
 
     /**
      * @var integer
-     * @ORM\Column(name="weeknumber", type="integer")
+     * @ORM\Column(name="weeknumber", type="integer", nullable=true)
      */
     private $weekNumber;
 
     /**
      * @var integer
-     * @ORM\Column(name="weekday", type="integer")
+     * @ORM\Column(name="weekday", type="integer", nullable=true)
      */
     private $weekday;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="day", type="integer", nullable=true)
+     */
+    private $day;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="calendarType", type="integer", nullable=true)
+     * 1 = persian, 2 = islamic, 3 = gregorian
+     */
+    private $calendarType;
 
     /**
      * Get id
@@ -89,4 +102,50 @@ class MonthlyRepeatPattern extends RepeatPattern
         return $this->weekday;
     }
 
+
+    /**
+     * Set day
+     *
+     * @param integer $day
+     * @return MonthlyRepeatPattern
+     */
+    public function setDay($day)
+    {
+        $this->day = $day;
+    
+        return $this;
+    }
+
+    /**
+     * Get day
+     *
+     * @return integer 
+     */
+    public function getDay()
+    {
+        return $this->day;
+    }
+
+    /**
+     * Set calendarType
+     *
+     * @param integer $calendarType
+     * @return MonthlyRepeatPattern
+     */
+    public function setCalendarType($calendarType)
+    {
+        $this->calendarType = $calendarType;
+    
+        return $this;
+    }
+
+    /**
+     * Get calendarType
+     *
+     * @return integer 
+     */
+    public function getCalendarType()
+    {
+        return $this->calendarType;
+    }
 }
