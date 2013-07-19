@@ -3,6 +3,7 @@
 namespace CE\TestBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Tests\DBAL\Types\DateTest;
 
 /**
  * UserRepository
@@ -18,13 +19,16 @@ class UserRepository extends EntityRepository
         $dql .= 'WHERE u.id = :id AND c.id = :calendar ';
         $dql .= 'AND e.start > :date AND (e.untilDate IS NULL OR e.untilDate > :udate)';
 
+        $udate = clone $date;
+        $udate->add(new \DateInterval("P7D"));
+
         $query = $this->getEntityManager()
             ->createQuery($dql)
             ->setParameters(array(
                 'id' => $user->getId(),
                 'calendar' => $calendar->getId(),
                 'date' => $date,
-                'udate' => $date->add(new \DateInterval("P7D"))
+                'udate' => $udate
             ));
         $results = $query->getResult();
         $eventList = array();
@@ -45,6 +49,8 @@ class UserRepository extends EntityRepository
                     array_push($eventList, $event);
             }
         }
+
+        return $results;
     }
 
     /**
