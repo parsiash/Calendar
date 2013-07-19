@@ -105,10 +105,10 @@ class User extends BaseUser
     /**
      * Add calendars
      *
-     * @param \CE\TestBundle\Entity\Event $calendars
+     * @param \CE\TestBundle\Entity\Calendar $calendars
      * @return User
      */
-    public function addCalendar(\CE\TestBundle\Entity\Event $calendars)
+    public function addCalendar(\CE\TestBundle\Entity\Calendar $calendars)
     {
         $this->calendars[] = $calendars;
     
@@ -118,9 +118,9 @@ class User extends BaseUser
     /**
      * Remove calendars
      *
-     * @param \CE\TestBundle\Entity\Event $calendars
+     * @param \CE\TestBundle\Entity\Calendar $calendars
      */
-    public function removeCalendar(\CE\TestBundle\Entity\Event $calendars)
+    public function removeCalendar(\CE\TestBundle\Entity\Calendar $calendars)
     {
         $this->calendars->removeElement($calendars);
     }

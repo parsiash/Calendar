@@ -14,7 +14,7 @@ class UserRepository extends EntityRepository
 {
     public function findAllWeekEvents(\DateTime $date, User $user, Calendar $calendar)
     {
-        $dql = 'SELECT e, u, c FROM CETestBundle:Event JOIN e.user u JOIN e.calendar c ';
+        $dql = 'SELECT e FROM CETestBundle:Event e JOIN e.user u JOIN e.calendar c ';
         $dql .= 'WHERE u.id = :id AND c.id = :calendar ';
         $dql .= 'AND e.start > :date AND (e.untilDate IS NULL OR e.untilDate > :udate)';
 
