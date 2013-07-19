@@ -13,6 +13,45 @@ use Doctrine\Tests\DBAL\Types\DateTest;
  */
 class UserRepository extends EntityRepository
 {
+    /**
+     * @param \DateTime $date
+     * @param User $user
+     * @param Calendar $calendar
+     */
+    public function findAllEventsOnDay(\DateTime $date, User $user, Calendar $calendar)
+    {
+        $dql = 'SELECT e FROM CETestBundle:Event e JOIN e.user u JOIN e.calendar c ';
+        $dql .= 'WHERE u.id = :id AND c.id = :calendar ';
+        $dql .= 'AND e.start > = :date AND (e.untilDate IS NULL OR e.untilDate > = :date)';
+
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameters(array(
+                'id' => $user->getId(),
+                'calendar' => $calendar->getId(),
+                'date' => $date));
+
+        $results = $query->getResult();
+
+        /** @var $event Event */
+        foreach ($results as $event) {
+            $repeatPattern = $event->getRepeatPattern();
+
+            if ($repeatPattern instanceof DailyRepeatPattern) {
+                if ($this->dailyPatternResolver($date, $event))
+                    array_push($eventList, $event);
+            }
+            elseif ($repeatPattern instanceof WeeklyRepeatPattern) {
+                if ($this->weeklyPatternResolver($date, $event))
+                    array_push($eventList, $event);
+            }
+            elseif ($repeatPattern instanceof MonthlyRepeatPattern) {
+                if ($this->monthlyPatternResolver($date, $event))
+                    array_push($eventList, $event);
+            }
+        }
+    }
+
     public function findAllWeekEvents(\DateTime $date, User $user, Calendar $calendar)
     {
         $dql = 'SELECT e FROM CETestBundle:Event e JOIN e.user u JOIN e.calendar c ';
@@ -133,6 +172,105 @@ class UserRepository extends EntityRepository
         elseif (is_null($event->getUntilDate())) {
             $w = ($date->diff($event->getStart())->d - $repeatPattern->getWeekday()) / 7;
             if ($w % $period == 0 && $w <= $event->getNumAppointments()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param \DateTime $date
+     * @param Event $event
+     * @return bool
+     */
+    private function dailyPatternResolver(\DateTime $date, Event $event)
+    {
+        $repeatPattern = $event->getRepeatPattern();
+        $period = $repeatPattern->getPeriod();
+        $diff = $date->diff($event->getStart())->d;
+
+        if (is_null($event->getUntilDate()) && is_null($event->getNumAppointments())) {
+            if ($diff % $period == 0)
+                return true;
+        }
+        elseif (is_null($event->getUntilDate())) {
+            if ($diff % $period == 0 && $diff / $period <= $event->getNumAppointments())
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param \DateTime $date
+     * @param Event $event
+     * @return bool
+     */
+    private function weeklyPatternResolver(\DateTime $date, Event $event)
+    {
+        /** @var $repeatPattern WeeklyRepeatPattern */
+        $repeatPattern = $event->getRepeatPattern();
+        $period = $repeatPattern->getPeriod();
+        $weekday = $repeatPattern->getWeekday();
+
+        if (intval($date->format('w')) != $weekday)
+            return false;
+
+        if (is_null($event->getUntilDate()) && is_null($event->getNumAppointments())) {
+            if (($date->diff($event->getStart())->d / 7) % $period == 0) {
+                return true;
+            }
+        }
+        elseif (is_null($event->getUntilDate())) {
+            if (($date->diff($event->getStart())->d / 7) % $period == 0 &&
+                ($date->diff($event->getStart())->d / (7 * $period) <= $event->getNumAppointments())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param \DateTime $date
+     * @param Event $event
+     * @return bool
+     */
+    private function monthlyPatternResolver(\DateTime $date, Event $event)
+    {
+        /** @var $repeatPattern MonthlyRepeatPattern */
+        $repeatPattern = $event->getRepeatPattern();
+        $period = $repeatPattern->getPeriod();
+
+        if (is_null($repeatPattern->getDay())) {
+            //TODO: to be implemented
+        }
+        else {
+            $cal = $repeatPattern->getCalendarType();
+            $calendarString = '';
+            switch ($cal) {
+                case 1: $calendarString = 'persian'; break;
+                case 2: $calendarString = 'islamic'; break;
+                case 3: $calendarString = 'gregorian'; break;
+            }
+            $formatter = \IntlDateFormatter::create(
+                'fa_IR',
+                \IntlDateFormatter::FULL,
+                \IntlDateFormatter::NONE,
+                new \DateTimeZone('Iran'),
+                IntlCalendar::createInstance(NULL, "calendar=$calendarString"),
+                'd'
+            );
+            if (intval($formatter->format($date)) != $repeatPattern->getDay())
+                return false;
+        }
+
+        if (is_null($event->getUntilDate()) && is_null($event->getNumAppointments())) {
+            if ($date->diff($event->getStart())->m % $period == 0) {
+                return true;
+            }
+        }
+        elseif (is_null($event->getUntilDate())) {
+            $m = $date->diff($event->getStart())->m;
+            if ($m % $period == 0 && $m / $period <= $event->getNumAppointments()) {
                 return true;
             }
         }
