@@ -31,4 +31,18 @@ class EventController extends Controller
 
         return $this->render('CETestBundle:Event:test.html.twig', array('data' => json_encode($a_events)));
     }
+
+    public function getCalendarsAction()
+    {
+        /** @var $user User */
+        $user = $this->getUser();
+        $calendars = array();
+        foreach ($user->getCalendars() as $cal) {
+            $calendar = array();
+            $calendar['id'] = $cal->getId();
+            $calendar['name'] = $cal->getName();
+            array_push($calendars, $calendar);
+        }
+        return $this->render('CETestBundle:Event:test.html.twig', array('data' => json_encode($calendars)));
+    }
 }
