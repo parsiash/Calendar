@@ -11,10 +11,15 @@
     cursor: pointer;
 }
 
+#weeklyCalendar th{
+    background-color: #7ab5d3;
+}
+
 #weeklyCalendarContainer{
     width: 100%;
     overflow: scroll;
     height: 500px;
+    border: #003399 outset;
 
 }
 

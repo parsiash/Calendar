@@ -68,6 +68,11 @@ $(document).ready(function(){
             eventCount++;
             $("#weeklyCalendar").append(newEvent.panel);
             newEvent.render();
+            if(!ajaxCreateEvent(newEvent)){
+                newEvent.panel.parentNode.removeChild(newEvent.panel);
+                events.pop();
+                eventCount--;
+            }
         }
     });
 
@@ -91,11 +96,10 @@ $(document).ready(function(){
  *generate a div that contains a weekly calendar table and returns it
  * */
 function generateWeeklyCalendar(){
-    var date = null;
 
     //generate weekDays
     for(var i=0;i<7;i++){
-        weekDays[i] = new day(i,date);
+        weekDays[i] = new day(i,"2010-08-17");
     }
 
     for(var j=0; j<24; j++){
@@ -240,6 +244,13 @@ function event(title,timeUnit){
     return this;
 }
 
+function weeklyCalendar(){
+    this.id;
+    this.name;
+    this.bedginDate;
+
+}
+
 
 /**
  * UI generators
@@ -288,4 +299,13 @@ function timeUnitCellGenerator(timeUnitIndex){
  * */
 function ajaxLoadCalendar(){
 
+}
+
+function ajaxCreateEvent(event){
+    $(document).ready(function(){
+        $.post("../createevent",{title: event.title, color: event.color, start: (event.beginTimeUnit.weekDay.date + " " + event.beginTimeUnit.timeInterval.beginHour + ":00:00"), end: (event.endTimeUnit.weekDay.date + " " + event.endTimeUnit.timeInterval.lastHour + ":00:00"), calendar_id: 3}, function(data, status){
+            $("#side").html(data);
+        });
+    });
+    return true;
 }

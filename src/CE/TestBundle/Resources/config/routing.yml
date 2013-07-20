@@ -1,3 +1,13 @@
+create_event:
+    pattern: /createevent
+    defaults: {_controller: CETestBundle:Default:createEvent }
+
+
+ce_test_event_editor:
+    pattern: /eventEdit
+    defaults: {_controller: CETestBundle:Default:eventEdit }
+
+
 ce_test_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: CETestBundle:Default:index }
