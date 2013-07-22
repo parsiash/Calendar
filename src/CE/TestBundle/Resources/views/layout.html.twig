@@ -3,7 +3,7 @@
     Welcome to Calendar
 {% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset("bundles/cetest/bootstrap/bootstrap-rtl.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("bundles/cetest/bootstrap/bootstrap.min.css") }}">
 {% endblock %}
 {% block body %}
     <div class="container-fluid">
@@ -13,24 +13,26 @@
                         <a href="google.com">Home</a>
                     </li>
                     <li>
-                       <a href="google.com"> calendars</a>
+                       <a href="google.com">Calendar</a>
                     </li>
                     <li>
-                        <a href="google.com">
-                            Profile
-                        </a>
+                        <a href="google.com">Profile</a>
                     </li>
                 </ul>
         </div>
         <div  class="row-fluid">
-            <div id="side" class="span2" style="background-color: cadetblue; height: 500px;">
-                sd
+            <div id="side" class="span2" style="vertical-align: top">
+                {% block leftpane %}
+                {% endblock %}
             </div>
             <div id="content" class="span10" >
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
     </div>
 {% endblock %}
-{% block headjs %}
+{% block javascripts %}
     <script src="{{ asset("bundles/cetest/js/jquery.js") }}"></script>
+    <script src="{{ asset("bundles/cetest/bootstrap/bootstrap.min.js") }}"></script>
 {% endblock %}

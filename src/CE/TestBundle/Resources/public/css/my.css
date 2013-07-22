@@ -1,0 +1,67 @@
+.timeUnit {
+
+}
+
+.major-row td {
+    border-bottom-width: 0;
+    border-top-width: 1px;
+    border-top-color: rgb(221, 221, 221);
+    border-top-style: solid;
+
+    height: 20px !important;
+}
+
+.minor-row td {
+    border-top-style: dashed;
+    border-top-width: 1px;
+    border-top-color: rgb(221, 221, 221);
+
+    height: 20px !important;
+}
+
+.hourcolumn {
+    text-align: right !important;
+}
+
+.event {
+    position: absolute;
+    z-index: 1000;
+    background-color: #ee491b;
+    padding: 10px !important;
+    box-sizing: border-box !important;;
+    color: white;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 2px #ccc;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.event-title {
+    font-weight: bold;
+}
+
+.event-time {
+    font-size: x-small;
+    font-style: italic;
+}
+
+.event-inner {
+
+}
+
+.resize-handle {
+    bottom: 0        !important; /* importants override pre jquery ui 1.7 styles */
+    width: 100%      !important;
+    height: 8px      !important;
+    overflow: hidden !important;
+    line-height: 8px !important;
+    font-size: 11px  !important;
+    font-family: monospace;
+    text-align: center;
+    cursor: s-resize;
+    display: block;
+    position: absolute;
+    z-index: 99999;
+    overflow: hidden;
+}

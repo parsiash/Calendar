@@ -5,6 +5,7 @@ namespace CE\TestBundle\Controller;
 use CE\TestBundle\Entity\Event;
 use CE\TestBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class EventController extends Controller

@@ -9,6 +9,7 @@
 {% endblock %}
 {% block  body%}
     {{ parent() }}
+    Test: {{ dump(name) }}
 {% endblock %}
 {% block javascripts %}
     <script>

@@ -1,0 +1,49 @@
+{% extends "CETestBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset("bundles/cetest/css/my.css") }}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block content %}
+    <div id="calendar"></div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Add new Event</h3>
+        </div>
+        <div class="modal-body">
+            {% form_theme form 'CETestBundle:Form:field.html.twig' %}
+            {{ form(form) }}
+            <label for="reputationType">Repeat</label>
+            <select name="reputationType" id="reputationType">
+                <option value="0">No repeat</option>
+                <option value="1">Daily</option>
+                <option value="2">Weekly</option>
+                <option value="3">Monthly</option>
+            </select>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary" onclick="saveEvent()">Save event</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block leftpane %}
+    <div id="calendars">
+        <h4>My Calendars</h4>
+        <ul class="nav nav-list">
+        {% for cal in calendars %}
+            <li {% if cal.id==app.session.get('calendar_id') %} class="active" {% endif %}>
+                <a tabindex="-1" href="#" onclick="changeCalendar({{ cal.id }})" >{{ cal.name }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset("bundles/cetest/js/my.js") }}"></script>
+{% endblock %}

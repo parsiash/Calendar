@@ -15,3 +15,11 @@ ce_test_homepage:
 ce_test_event:
     pattern:  /event/{cal_id}/{date}
     defaults: { _controller: CETestBundle:Event:getDateEvent }
+
+ce_test_calendar:
+    pattern:  /calendars
+    defaults: { _controller: CETestBundle:Event:getCalendars }
+
+show_calendar:
+    pattern:  /calendar
+    defaults: { _controller: CETestBundle:Default:showCalendar }

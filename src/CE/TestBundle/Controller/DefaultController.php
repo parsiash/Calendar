@@ -25,7 +25,7 @@ class DefaultController extends Controller
 //            new DateTimeZone('Iran'),
 //            IntlCalendar::createInstance(NULL, '@calendar=persian'));
 
-        return $this->render('CETestBundle:Default:index.html.twig');
+        return $this->render('CETestBundle:Default:index.html.twig', array("name" => $name));
     }
 
     public function eventEditAction(){
@@ -78,33 +78,65 @@ class DefaultController extends Controller
     }
 
     //create and persist an event to the database
-    public function createEventAction(Request $request){
-//        $s = $request->get('calendar_id');
-//        return new Response($s);
-        $em = $this->getDoctrine()->getManager();
+    public function createEventAction(Request $request)
+    {
+//        $em = $this->getDoctrine()->getManager();
+//        $event = new Event();
+//        $event->setTitle($request->get('title'));
+//        $event->setColor($request->get('color'));
+//        $event->setDescription($request->get('description'));
+//        $event->setStart(new \DateTime($request->get('start')));
+//        $event->setEnd(new \DateTime($request->get('end')));
+////        $calendar = $this->getDoctrine()->getRepository("CETestBundle:Calendar")->find($request->get("calendar_id"));
+////        $calendar = new Calendar();
+////        $calendar->setName("parsia");
+////        $em->
+////        $em->persist($calendar);
+////        $event->setCalendar($calendar);
+//        $event->setUser($this->getUser());
         $event = new Event();
-        $event->setColor('red');
-        $event->setTitle($request->get('title'));
-        $event->setStart(new \DateTime($request->get('start')));
-        $event->setEnd(new \DateTime($request->get('end')));
-        $calendar = $this->getDoctrine()->getRepository("CETestBundle:Calendar")->find($request->get("calendar_id"));
-//        $calendar = new Calendar();
-//        $calendar->setName("parsia");
-//        $em->
-//        $em->persist($calendar);
-        $event->setCalendar($calendar);
-        $event->setUser($this->getUser());
-        try{
-            $em->persist($event);
-            $em->flush();
-        }
-        catch(\Exception $ex){
-        }
-        return new Response("success");
-    }
+//        $em = $this->getDoctrine()->getManager();
+        $eventForm = $this->createFormBuilder($event)
+            ->add('title', 'text')
+            ->add('description', 'text', array('required' => false))
+            ->add('color', 'choice', array("choices" => array("red" , "blue", "orange" , "green", "brown", "gray")))
+            ->add('start', 'time')
+            ->add('end', 'time')
+            ->add('untilDate', 'date', array('empty_value' => '', 'empty_data' => null, 'required' => false))
+            ->add('numAppointments', 'integer', array('label' => 'Number of occasions', 'required' => false))
+            ->getForm();
 
+        $event->setCalendar($this->getDoctrine()->getRepository('CETestBundle:Calendar')->find($request->getSession()->get('calendar_id')));
+
+        $eventForm->handleRequest($this->getRequest());
+        if($eventForm->isValid()) {
+            return new Response(serialize($event));
+        }
+        return new Response("Invalid event");
+    }
 
     public function editEventAction(){
 
+    }
+
+    public function showCalendarAction(Request $request)
+    {
+        $event = new Event();
+        $eventForm = $this->createFormBuilder($event)
+            ->add('title', 'text')
+            ->add('description', 'text', array('required' => false))
+            ->add('color', 'choice', array("choices" => array("red" , "blue", "orange" , "green", "brown", "gray")))
+            ->add('start', 'time')
+            ->add('end', 'time')
+            ->add('untilDate', 'date', array('empty_value' => '', 'empty_data' => null, 'required' => false))
+            ->add('numAppointments', 'integer', array('label' => 'Number of occasions', 'required' => false))
+            ->getForm();
+
+        $request->getSession()->set('calendar_id',  $request->get('id'));
+
+        return $this->render('CETestBundle:Default:calendar.html.twig',
+            array("form" => $eventForm->createView(),
+                "calendars" => $this->getUser()->getCalendars(),
+            ));
     }
 }
