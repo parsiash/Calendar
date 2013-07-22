@@ -8,6 +8,8 @@ var timeUnitIndex = 0;
 
 var events = [];
 
+var offset = 0;
+
 // resize area
 var myY = 0;
 var mouseDownEvent = -1;
@@ -17,6 +19,8 @@ var lastIndex = -1;
 
 $(document).ready(function () {
     generateWeeklyCalendar();
+    getDateList();
+    loadEvents();
 });
 
 $(document).mouseup(function(e) {
@@ -148,6 +152,7 @@ function addNewEvent(index) {
         $("#form_end_minute").val(30);
     }
     lastIndex = index;
+    $("#dayOfWeek").val(lastIndex % 7);
 }
 
 function saveEvent() {
@@ -242,7 +247,7 @@ function CalendarEvent(title, timeUnitId) {
 //            .addClass("well")
             .css("height", height)
             .css("background-color", this.color);
-        console.log("st: " + this.timeUnitId + " end: " + this.endTimeUnit + " height: " + height);
+//        console.log("st: " + this.timeUnitId + " end: " + this.endTimeUnit + " height: " + height);
         this.updateTimeStamp();
     };
 
@@ -260,9 +265,82 @@ function CalendarEvent(title, timeUnitId) {
             timestamp += end/2 + ":00";
         else
             timestamp += parseInt(end/2) + ":30";
-        console.log(timestamp);
+//        console.log(timestamp);
         $("#eventtime-" + this.id).html(timestamp);
     };
 
     return this;
+}
+
+function getDateList() {
+    $.get(
+        '/calendar/app_dev.php/getdates',
+        { "offset" : offset},
+        function(data) {
+            dayDatesGregorian = JSON.parse(data);
+            console.log(data);
+            updateDates();
+        }
+    );
+}
+
+function updateDates() {
+    for (var i = 0; i < 7; i++) {
+        $("#dayheader-" + (i+1)).html(dayDatesGregorian[i]);
+    }
+}
+
+function prevWeek() {
+    offset--;
+    getDateList();
+    loadEvents();
+}
+
+function currWeek() {
+    offset = 0;
+    getDateList();
+    loadEvents();
+}
+
+function nextWeek() {
+    offset++;
+    getDateList();
+    loadEvents();
+}
+
+function loadEvents() {
+    events = [];
+    mouseDownEvent = -1;
+    $(".event").remove();
+
+    $.get(
+        '/calendar/app_dev.php/event',
+        {
+            "offset" : offset
+        },
+        function(data) {
+            console.log(data);
+            var es = JSON.parse(data);
+            for (var i = 0; i < 7; i++) {
+                for (var j = 0; j < es[i].length; j++) {
+                    var s_date = new Date(es[i][j].start.date);
+                    var s_h = s_date.getHours();
+                    var s_m = s_date.getMinutes();
+                    var e_date = new Date(es[i][j].end.date);
+                    var e_h = e_date.getHours();
+                    var e_m = e_date.getMinutes();
+                    var timeUnit = s_h * 14 + i + (s_m == 30 ? 7 : 0);
+
+                    console.log(es[i][j]);
+
+                    var e = new CalendarEvent(es[i][j].title, timeUnit);
+                    e.id = events.length;
+                    e.endTimeUnit = e_h * 14 + (e_m == 30 ? 7 : 0) + i - 7;
+                    e.createPanel(es[i][j].color);
+
+                    events.push(e);
+                }
+            }
+        }
+    );
 }

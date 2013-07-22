@@ -21,14 +21,14 @@ class UserRepository extends EntityRepository
     {
         $dql = 'SELECT e FROM CETestBundle:Event e JOIN e.user u JOIN e.calendar c ';
         $dql .= 'WHERE u.id = :id AND c.id = :calendar ';
-        $dql .= 'AND e.start > = :date AND (e.untilDate IS NULL OR e.untilDate > = :date)';
+        $dql .= 'AND e.start < = :date AND (e.untilDate IS NULL OR e.untilDate > = :date)';
 
         $query = $this->getEntityManager()
             ->createQuery($dql)
             ->setParameters(array(
                 'id' => $user->getId(),
                 'calendar' => $calendar->getId(),
-                'date' => $date));
+                'date' => $date->setTime(23, 59, 59)));
 
         $results = $query->getResult();
 
@@ -37,8 +37,11 @@ class UserRepository extends EntityRepository
         /** @var $event Event */
         foreach ($results as $event) {
             $repeatPattern = $event->getRepeatPattern();
-
-            if ($repeatPattern instanceof DailyRepeatPattern) {
+            if (is_null($repeatPattern)) {
+                if (strtotime($event->getStart()->format("y-m-d")) == strtotime($date->format("y-m-d")))
+                    array_push($eventList, $event);
+            }
+            elseif ($repeatPattern instanceof DailyRepeatPattern) {
                 if ($this->dailyPatternResolver($date, $event))
                     array_push($eventList, $event);
             }

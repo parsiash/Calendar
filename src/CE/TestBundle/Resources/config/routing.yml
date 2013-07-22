@@ -13,7 +13,7 @@ ce_test_homepage:
     defaults: { _controller: CETestBundle:Default:index }
 
 ce_test_event:
-    pattern:  /event/{cal_id}/{date}
+    pattern:  /event
     defaults: { _controller: CETestBundle:Event:getDateEvent }
 
 ce_test_calendar:
@@ -23,3 +23,7 @@ ce_test_calendar:
 show_calendar:
     pattern:  /calendar
     defaults: { _controller: CETestBundle:Default:showCalendar }
+
+get_dates:
+    pattern: /getdates
+    defaults: { _controller: CETestBundle:Default:getDates }

@@ -5,6 +5,11 @@
     <link href="{{ asset("bundles/cetest/css/my.css") }}" rel="stylesheet" type="text/css">
 {% endblock %}
 {% block content %}
+    <div class="btn-group" style="margin-bottom: 10px">
+        <button class="btn" onclick="prevWeek()">Previous</button>
+        <button class="btn" onclick="currWeek()">Current</button>
+        <button class="btn" onclick="nextWeek()">Next</button>
+    </div>
     <div id="calendar"></div>
 
     <!-- Modal -->
@@ -15,14 +20,17 @@
         </div>
         <div class="modal-body">
             {% form_theme form 'CETestBundle:Form:field.html.twig' %}
-            {{ form(form) }}
-            <label for="reputationType">Repeat</label>
-            <select name="reputationType" id="reputationType">
-                <option value="0">No repeat</option>
-                <option value="1">Daily</option>
-                <option value="2">Weekly</option>
-                <option value="3">Monthly</option>
-            </select>
+            {{ form_start(form, {'method': 'GET'}) }}
+                {{ form_rest(form) }}
+                <label for="reputationType">Repeat</label>
+                <select name="reputationType" id="reputationType">
+                    <option value="0">No repeat</option>
+                    <option value="1">Daily</option>
+                    <option value="2">Weekly</option>
+                    <option value="3">Monthly</option>
+                </select>
+                <input type="hidden" name="dayOfWeek" id="dayOfWeek" value="0" />
+            {{ form_end(form) }}
         </div>
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -37,7 +45,7 @@
         <ul class="nav nav-list">
         {% for cal in calendars %}
             <li {% if cal.id==app.session.get('calendar_id') %} class="active" {% endif %}>
-                <a tabindex="-1" href="#" onclick="changeCalendar({{ cal.id }})" >{{ cal.name }}</a>
+                <a tabindex="-1" href="{{ path('show_calendar') }}?id={{ cal.id }}" >{{ cal.name }}</a>
             </li>
         {% endfor %}
         </ul>
